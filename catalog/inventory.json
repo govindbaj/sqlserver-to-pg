@@ -1,0 +1,112 @@
+[
+  {
+    "object": "dbo.Beneficiary",
+    "schema": "dbo",
+    "type": "table",
+    "source_file": "fixtures/synthetic-demo/tables.sql",
+    "line_range": "6-19",
+    "line_count": 14,
+    "dependencies": { "references": [], "referenced_by": ["dbo.Enrollment", "dbo.Claim"], "tables_read": [], "tables_written": [], "procs_called": [] },
+    "feature_flags": []
+  },
+  {
+    "object": "dbo.Provider",
+    "schema": "dbo",
+    "type": "table",
+    "source_file": "fixtures/synthetic-demo/tables.sql",
+    "line_range": "22-31",
+    "line_count": 10,
+    "dependencies": { "references": [], "referenced_by": ["dbo.Claim"], "tables_read": [], "tables_written": [], "procs_called": [] },
+    "feature_flags": []
+  },
+  {
+    "object": "dbo.Enrollment",
+    "schema": "dbo",
+    "type": "table",
+    "source_file": "fixtures/synthetic-demo/tables.sql",
+    "line_range": "34-46",
+    "line_count": 13,
+    "dependencies": { "references": ["dbo.Beneficiary"], "referenced_by": [], "tables_read": [], "tables_written": [], "procs_called": [] },
+    "feature_flags": []
+  },
+  {
+    "object": "dbo.Claim",
+    "schema": "dbo",
+    "type": "table",
+    "source_file": "fixtures/synthetic-demo/tables.sql",
+    "line_range": "49-65",
+    "line_count": 17,
+    "dependencies": { "references": ["dbo.Beneficiary", "dbo.Provider"], "referenced_by": ["dbo.ClaimAttachment"], "tables_read": [], "tables_written": [], "procs_called": [] },
+    "feature_flags": []
+  },
+  {
+    "object": "dbo.ClaimAttachment",
+    "schema": "dbo",
+    "type": "table",
+    "source_file": "fixtures/synthetic-demo/tables.sql",
+    "line_range": "68-78",
+    "line_count": 11,
+    "dependencies": { "references": ["dbo.Claim"], "referenced_by": [], "tables_read": [], "tables_written": [], "procs_called": [] },
+    "feature_flags": []
+  },
+  {
+    "object": "dbo.InsertBeneficiary",
+    "schema": "dbo",
+    "type": "proc",
+    "source_file": "fixtures/synthetic-demo/procs/InsertBeneficiary.sql",
+    "line_range": "1-23",
+    "line_count": 23,
+    "dependencies": { "references": [], "referenced_by": [], "tables_read": [], "tables_written": ["dbo.Beneficiary"], "procs_called": [] },
+    "feature_flags": []
+  },
+  {
+    "object": "dbo.GetTopRecentClaimsForBeneficiary",
+    "schema": "dbo",
+    "type": "proc",
+    "source_file": "fixtures/synthetic-demo/procs/GetTopRecentClaimsForBeneficiary.sql",
+    "line_range": "1-21",
+    "line_count": 21,
+    "dependencies": { "references": [], "referenced_by": [], "tables_read": ["dbo.Claim", "dbo.Provider"], "tables_written": [], "procs_called": [] },
+    "feature_flags": []
+  },
+  {
+    "object": "dbo.BuildEnrollmentSummary",
+    "schema": "dbo",
+    "type": "proc",
+    "source_file": "fixtures/synthetic-demo/procs/BuildEnrollmentSummary.sql",
+    "line_range": "1-52",
+    "line_count": 52,
+    "dependencies": { "references": [], "referenced_by": [], "tables_read": ["dbo.Enrollment", "dbo.Beneficiary", "dbo.Claim"], "tables_written": ["#ActiveEnrollment (temp table)"], "procs_called": [] },
+    "feature_flags": ["temp_table", "cross_apply"]
+  },
+  {
+    "object": "dbo.UpsertProviderEnrollment",
+    "schema": "dbo",
+    "type": "proc",
+    "source_file": "fixtures/synthetic-demo/procs/UpsertProviderEnrollment.sql",
+    "line_range": "1-41",
+    "line_count": 41,
+    "dependencies": { "references": [], "referenced_by": [], "tables_read": ["dbo.Provider"], "tables_written": ["dbo.Provider"], "procs_called": [] },
+    "feature_flags": ["merge", "try_catch"]
+  },
+  {
+    "object": "dbo.RecalculateAllowedAmounts",
+    "schema": "dbo",
+    "type": "proc",
+    "source_file": "fixtures/synthetic-demo/procs/RecalculateAllowedAmounts.sql",
+    "line_range": "1-60",
+    "line_count": 60,
+    "dependencies": { "references": [], "referenced_by": [], "tables_read": ["dbo.Claim"], "tables_written": ["dbo.Claim"], "procs_called": [] },
+    "feature_flags": ["cursor"]
+  },
+  {
+    "object": "dbo.ApplyPlanCodeMassUpdate",
+    "schema": "dbo",
+    "type": "proc",
+    "source_file": "fixtures/synthetic-demo/procs/ApplyPlanCodeMassUpdate.sql",
+    "line_range": "1-47",
+    "line_count": 47,
+    "dependencies": { "references": [], "referenced_by": [], "tables_read": ["dbo.Enrollment"], "tables_written": ["dbo.Enrollment", "dbo.PlanCodeAudit (unresolved — not defined in tables.sql)"], "procs_called": [] },
+    "feature_flags": ["dynamic_sql", "nested_transaction"]
+  }
+]

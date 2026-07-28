@@ -1,0 +1,21 @@
+# Engagement-specific configuration for this migration kit.
+# Fill in before starting Stage 1. The rulebook (CLAUDE.md) does not
+# change between engagements -- only this file should.
+client: "REPLACE_ME"          # e.g. "Acme State Medicaid Agency"
+program: "REPLACE_ME"         # e.g. "Medicaid digital data platform migration"
+
+source:
+  engine: "SQL Server"
+  hosting: "REPLACE_ME"       # e.g. on-prem, GCP Cloud SQL, Azure SQL
+  default_schema: "dbo"
+
+target:
+  engine: "PostgreSQL"
+  hosting: "REPLACE_ME"       # e.g. AWS Aurora PostgreSQL
+  schema: "REPLACE_ME"        # named schema dbo maps to -- never `public`
+
+scale:
+  tables: null                # approx. table count
+  stored_procedures: null     # approx. proc count
+
+notes: ""

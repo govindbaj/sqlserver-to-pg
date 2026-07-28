@@ -1,0 +1,7 @@
+sno,object,tier,reasons,est_hours
+1,dbo.InsertBeneficiary,GREEN,"single-statement CRUD; only GETDATE/ISNULL/LEN; 23 lines (<150)",1
+2,dbo.GetTopRecentClaimsForBeneficiary,GREEN,"simple join + TOP; no cursors/temp tables/dynamic SQL; 21 lines (<150)",1
+3,dbo.BuildEnrollmentSummary,AMBER,"uses #temp table and CROSS APPLY; 52 lines",6
+4,dbo.UpsertProviderEnrollment,AMBER,"uses MERGE and TRY/CATCH; 41 lines",5
+5,dbo.RecalculateAllowedAmounts,RED,"CURSOR with order-dependent running-total logic; needs human redesign to a set-based/window-function rewrite",12
+6,dbo.ApplyPlanCodeMassUpdate,RED,"dynamic SQL (sp_executesql) built with a caller-supplied column name; nested/named transactions (SAVE TRANSACTION); also writes to dbo.PlanCodeAudit which is an unresolved dependency",10

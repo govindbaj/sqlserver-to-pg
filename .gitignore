@@ -1,0 +1,21 @@
+# OS cruft
+.DS_Store
+Thumbs.db
+
+# Editor/IDE
+.vscode/
+.idea/
+*.swp
+
+# Secrets / connection details — this kit must never hold live credentials
+# or production connection strings (see CLAUDE.md guardrails).
+.env
+.env.*
+*.pgpass
+*credentials*.json
+*connection*.json
+
+# Local scratch / working files
+*.tmp
+*.bak
+scratch/
